@@ -1,0 +1,56 @@
+<h1>Original name: {{name}}</h1>
+<h1>Original name: {{name|uppercase}}</h1>
+<h1>Original name: {{name|lowercase}}</h1>
+<h1>Original name: {{name|titlecase}}</h1>
+<h1>Number : {{num}}</h1>
+<h1>Number in currency : {{num|currency}}</h1>
+<h1>Number in INR currency : {{num|currency:'INR'}}</h1>
+<h1>Number in USD currency : {{num|currency:'USD'}}</h1>
+<br><br>
+<h1>Number in percentage : {{percentage|percent}}</h1>
+<br><br>
+<h1>json Representation :{{person1}}</h1>
+<h1>json Representation :{{person1|json}}</h1>
+<br><br>
+<h1>Date:{{dob}}</h1>
+<h1>Date:{{dob|date}}</h1>
+<h1>Date:{{dob|date:'dd/MM/YYYY'}}</h1>
+<br>
+<h1>Original name: {{name}}</h1>
+<h1>Original name: {{name|slice:2:5}}</h1>
+<br>
+<h1>Original Number : {{num}}</h1>
+<h1>Original Number affected by pipe : {{num|multipleOf5}}</h1>
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <input type="text" placeholder="User name" #username ngModel name="username"><br>
+    <input type="email"  placeholder="User email" #useremail ngModel name="useremail"><br>
+    <input type="number" placeholder="User number" #usernumber ngModel name="usernumber"><br>
+    <button type="submit">Submit</button>
+</form>
+
+<!-- to group the ngform -->
+
+<form [formGroup]="myFormReact" (ngSubmit)="onSubmitReact()">
+  <input type="text" placeholder="User name" formControlName="username"><br>
+ 
+  @if(myFormReact.get('username')?.invalid && myFormReact.get('username')?.touched)
+  {
+    <small style="color:red">
+      @if(myFormReact.get('username')?.errors?.['required'])
+      {
+       Name is required!
+      }
+       @if(myFormReact.get('username')?.errors?.['minlength'])
+      {
+       Name must be 5 char
+      }
+    </small>
+  }
+  <input type="email" placeholder="User email" formControlName="useremail"><br>
+  <input type="age" placeholder="User age" formControlName="userage"><br>
+  <button type="submit"> submit</button>
+</form>
+
+
+
