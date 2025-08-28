@@ -1,0 +1,22 @@
+<div class="container">
+  <h2>📋 Todo List</h2>
+
+  <!-- Priority Filter -->
+  <label for="priorityFilter">Filter by Priority:</label>
+  <select id="priorityFilter" [(ngModel)]="selectedPriority" (change)="filterByPriority(selectedPriority)">
+    <option value="ALL">All</option>
+    <option value="LOW">Low</option>
+    <option value="MEDIUM">Medium</option>
+    <option value="HIGH">High</option>
+  </select>
+
+  <ul>
+    <li *ngFor="let todo of todos">
+      <span [ngClass]="{done: todo.markTask === 'COMPLETED'}">
+        {{ todo.taskDesc }} - <b>{{ todo.priority }}</b>
+      </span>
+      <button (click)="markAsCompleted(todo)" [disabled]="todo.markTask === 'COMPLETED'">✅ Complete</button>
+      <button (click)="deleteTask(todo.id!)">🗑️ Delete</button>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,25 @@
+<h2 class="title">🎶 Songs Playlist</h2>
+
+<div class="scroll-container">
+  <div class="scroll-content">
+    <mat-card *ngFor="let song of songs" class="music-card">
+      <img mat-card-image [src]="song.poster" alt="{{song.name}}">
+      <mat-card-content>
+        <h3>{{ song.name }}</h3>
+        <p>{{ song.artist }}</p>
+        <p><b>Album:</b> {{ song.album }}</p>
+        <p><b>Duration:</b> {{ song.duration }}</p>
+        <p>
+          <b>Rating:</b>
+          <span *ngFor="let star of [].constructor(song.rating)">⭐</span>
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-icon-button color="primary">
+          <mat-icon>play_arrow</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+

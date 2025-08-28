@@ -1,0 +1,49 @@
+/* CONTAINER */
+.container {
+  /* Use a fluid padding with 'clamp()' for better responsiveness. */
+  padding: clamp(10px, 4vw, 30px);
+  /* Optional: Prevents content from stretching too wide on large monitors. */
+  max-width: 1400px;
+  /* Centers the container horizontally on the page. */
+  margin: 0 auto;
+}
+
+/* FORM FIELDS */
+mat-form-field {
+  /* Use a flexible width. 'min(200px, 100%)' ensures the width is 200px but
+     won't exceed 100% on smaller screens. */
+  width: min(200px, 100%);
+  margin-bottom: 20px;
+}
+
+/* MOVIE GRID */
+.movie-grid {
+  /* The 'auto-fit' and 'minmax' combination is already a great solution.
+     Let's tweak the minmax value for better card scaling.
+     'minmax(200px, 1fr)' ensures cards are at least 200px wide but will
+     grow to fill the available space equally. */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* MOVIE CARDS */
+mat-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+mat-card:hover {
+  transform: scale(1.03); /* A slightly smaller scale for a smoother effect. */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* A more subtle shadow on hover. */
+}
+
+/* TOP RATED STYLING */
+.top-rated {
+  border: 3px solid gold;
+  box-shadow: 0 0 10px gold;
+}
+
+/* STAR RATING */
+.stars {
+  color: orange;
+}

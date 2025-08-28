@@ -1,0 +1,67 @@
+<form [formGroup]="myReactiveForm" (ngSubmit)="onSubmit()">
+  Name:<input
+    type="text"
+    placeholder="Enter your Name"
+    formControlName="name"
+    required
+  /><br />
+  Email:<input
+    type="email"
+    placeholder="Enter your Email"
+    formControlName="email"
+    required
+  />
+  <button type="submit" *ngIf="!editMode">Add</button>
+ 
+    <button type="button" *ngIf="editMode" (click)="update()">Update</button>
+    <button type="button"  *ngIf="editMode" (click)="patchUpdate()" >PatchUpdate</button>
+    <button type="button"  (click)="cancelEdit()" *ngIf="editMode">Cancel</button>
+</form>
+
+<br /><br /><br />
+<hr />
+<br />
+
+<h2>Get All Users</h2>
+<button (click)="getAllUsers()">Get All Users</button>
+<ul>
+  @for (u of users; track u.id) {
+  <li>
+    @if (u.name && u.email) {
+    {{ u.id }}-----{{ u.name }}----{{ u.email }}
+    } @else{
+    {{ u.id }}----Missing }
+    <button (click)="deleteById(u.id)">DELETE</button>
+    <button (click)="editUser(u)">Edit</button>
+  
+  </li>
+  }
+</ul>
+
+<br /><br /><br />
+<hr />
+<br />
+
+<h2>Get User By Id</h2>
+<input #idInput type="number" placeholder="Enter the User Id You Want" />
+<button (click)="getById(+idInput.value)">Get User</button>
+
+<div *ngIf="user">{{ user.id }}----{{ user.name }}----{{ user.email }}</div>
+
+<h2>Delete User By Id</h2>
+<input
+  #deleteIdInput
+  type="number"
+  placeholder="Enter the User Id You Want to delete"
+/>
+<button (click)="deleteById(+deleteIdInput.value)">DELETE User</button>
+
+<h2>Get User By Name</h2>
+<input #nameInput type="text" placeholder="Enter the User Name You Want" />
+<button (click)="getUserByname(nameInput.value)">Get User</button>
+
+<ul>
+  <li *ngFor="let user of userByName;">
+    {{ user.id }}----{{ user.name }}----{{ user.email}}
+  </li>
+</ul>

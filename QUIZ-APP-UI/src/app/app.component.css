@@ -1,0 +1,6 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+.navbar-noauth mat-toolbar{
+    background-color:#62dfdf;
+}

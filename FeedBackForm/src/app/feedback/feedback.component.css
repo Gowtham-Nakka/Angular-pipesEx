@@ -1,0 +1,43 @@
+.feedbackForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #fee3e7, #e3eeff); /* soft gradient */
+  padding: 20px;
+}
+
+mat-card {
+  background-color: rgba(184, 247, 248, 0.85); /* elegant semi-transparent red */
+  color: #fff;
+  max-width: 450px;
+  width: 100%;
+  padding: 30px 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+mat-card:hover {
+  transform: scale(1.02);
+}
+
+mat-card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+button {
+  margin-top: 10px;
+  width: 100%;
+  font-weight: bold;
+  border-radius: 8px;
+}
