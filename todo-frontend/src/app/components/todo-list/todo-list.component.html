@@ -12,10 +12,20 @@
 
   <ul>
     <li *ngFor="let todo of todos">
-      <span [ngClass]="{done: todo.markTask === 'COMPLETED'}">
+      <input type="checkbox" [checked]="todo.markTask === 'COMPLETED'" (change)="markAsCompleted(todo)" />
+
+      <!-- Normal view -->
+      <span *ngIf="editingId !== todo.id" [ngClass]="{done: todo.markTask === 'COMPLETED'}">
         {{ todo.taskDesc }} - <b>{{ todo.priority }}</b>
       </span>
-      <button (click)="markAsCompleted(todo)" [disabled]="todo.markTask === 'COMPLETED'">✅ Complete</button>
+
+      <!-- Edit mode -->
+      <input *ngIf="editingId === todo.id" type="text" [(ngModel)]="editText" />
+
+      <!-- Buttons -->
+      <button *ngIf="editingId !== todo.id" (click)="startEdit(todo)">✏️ Edit</button>
+      <button *ngIf="editingId === todo.id" (click)="saveEdit(todo)">💾 Save</button>
+      <button *ngIf="editingId === todo.id" (click)="cancelEdit()">❌ Cancel</button>
       <button (click)="deleteTask(todo.id!)">🗑️ Delete</button>
     </li>
   </ul>

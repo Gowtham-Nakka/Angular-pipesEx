@@ -1,60 +1,53 @@
-<div class="feedbackForm"> 
- 
-  <mat-card> 
-    <mat-card-title>FeedBack Form</mat-card-title> 
-    <mat-card-content> 
-      <form [formGroup]="feedback" (ngSubmit)="onSubmit()"> 
-        <mat-form-field> 
-          <mat-label>Enter Your Name</mat-label> 
-          <input matInput type="text" placeholder="Enter Your Name" 
-formControlName="name" appearance="outline" /> 
-          <mat-icon matSuffix>person</mat-icon> 
-          <mat-error *ngIf="feedback.get('name')?.hasError('required')">Name is 
-required</mat-error> 
-          <mat-error *ngIf="feedback.get('name')?.hasError('minlength')">Name must be at 
-least 5 characters</mat-error> 
-          <mat-error *ngIf="feedback.get('name')?.hasError('maxlength')">Name cannot exceed 
-30 characters</mat-error> 
-        </mat-form-field> 
-        <br> 
- 
-        <mat-form-field> 
-          <mat-label>Enter Your College Email</mat-label> 
-          <input matInput type="email" placeholder="Enter Your College Email" 
-formControlName="email" /> 
-          <mat-icon matSuffix>email</mat-icon> 
- 
-          <mat-error *ngIf="feedback.get('email')?.hasError('required')">Email is required</mat-error> 
-          <mat-error *ngIf="feedback.get('email')?.hasError('email')">Invalid email format</mat-error> 
- 
-        </mat-form-field> 
-        <br> 
-        <mat-form-field> 
-          <mat-label>Enter Your Subject</mat-label> 
-          <input matInput type="text" formControlName="subject" placeholder="Enter Your 
-Subject" /> 
-          <mat-error *ngIf="feedback.get('subject')?.hasError('required')">Subject is 
-required</mat-error> 
-          <mat-error *ngIf="feedback.get('subject')?.hasError('minlength')">Subject must be at 
-least 5 
-            characters</mat-error> 
-          <mat-error *ngIf="feedback.get('subject')?.hasError('maxlength')">subject cannot 
-exceed 40 
-            characters</mat-error> 
- 
-        </mat-form-field> 
-        <br> 
-        <mat-form-field> 
-          <mat-label>Enter Your Issue</mat-label> 
-          <textarea matInput type="text" placeholder="Enter Your Issue" 
-formControlName="issue"></textarea> 
-          <mat-error *ngIf="feedback.get('issue')?.hasError('required')">Issue is required</mat-error> 
-          <mat-error *ngIf="feedback.get('issue')?.hasError('maxlength')">Issue cannot exceed 
-30 characters</mat-error> 
-        </mat-form-field> 
-<br><br> 
-<button on mat-raised-bu on color="primary" type="submit">Submit</button> 
-</form> 
-</mat-card-content> 
-</mat-card> 
+<div class="feedbackForm">
+  <mat-card>
+    <mat-card-title>{{isEditMode ? 'Edit Feedback' : 'Feedback Form'}}</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+        <input type="hidden" formControlName="id" />
+
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="name" />
+          <mat-error *ngIf="feedbackForm.get('name')?.hasError('required')">Name is required</mat-error>
+          <mat-error *ngIf="feedbackForm.get('name')?.hasError('minlength')">Minimum 5 characters</mat-error>
+          <mat-error *ngIf="feedbackForm.get('name')?.hasError('maxlength')">Maximum 30 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" />
+          <mat-error *ngIf="feedbackForm.get('email')?.hasError('required')">Email is required</mat-error>
+          <mat-error *ngIf="feedbackForm.get('email')?.hasError('email')">Invalid email</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Subject</mat-label>
+          <input matInput type="text" formControlName="subject" />
+          <mat-error *ngIf="feedbackForm.get('subject')?.hasError('required')">Subject required</mat-error>
+          <mat-error *ngIf="feedbackForm.get('subject')?.hasError('minlength')">Min 5 chars</mat-error>
+          <mat-error *ngIf="feedbackForm.get('subject')?.hasError('maxlength')">Max 40 chars</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Comments</mat-label>
+          <textarea matInput formControlName="comments"></textarea>
+          <mat-error *ngIf="feedbackForm.get('comments')?.hasError('required')">Comments required</mat-error>
+          <mat-error *ngIf="feedbackForm.get('comments')?.hasError('maxlength')">Max 350 chars</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">{{isEditMode ? 'Update' : 'Submit'}}</button>
+        <button mat-raised-button color="warn" type="button" (click)="cancelEdit()" *ngIf="isEditMode">Cancel</button>
+      </form>
+
+      <h2>All Feedback</h2>
+      <ul>
+        <li *ngFor="let fb of feedbackList">
+          <b>{{fb.name}}</b> ({{fb.email}}) - {{fb.subject}}<br>
+          {{fb.comments}}<br>
+          <button mat-raised-button color="accent" (click)="editFeedback(fb)">Edit</button>
+          <button mat-raised-button color="warn" (click)="deleteFeedback(fb.id!)">Delete</button>
+        </li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
 </div>

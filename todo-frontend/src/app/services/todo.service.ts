@@ -7,31 +7,35 @@ import { Todo } from '../models/todo.model';
   providedIn: 'root'
 })
 export class TodoService {
-  private baseUrl = 'http://localhost:8080/api/todos';
+  private apiUrl = 'http://localhost:8080/api/todos'; // ✅ Your Spring Boot backend
 
   constructor(private http: HttpClient) {}
 
+  // CREATE
+  createTask(todo: Todo): Observable<Todo> {
+    return this.http.post<Todo>(`${this.apiUrl}/createTask`, todo);
+  }
+
+  // READ
   getAllTasks(): Observable<Todo[]> {
-    return this.http.get<Todo[]>(`${this.baseUrl}/getAllTasks`);
+    return this.http.get<Todo[]>(`${this.apiUrl}/getAllTasks`);
   }
 
   getTaskByPriority(priority: string): Observable<Todo[]> {
-    return this.http.get<Todo[]>(`${this.baseUrl}/getTaskByPriority/${priority}`);
+    return this.http.get<Todo[]>(`${this.apiUrl}/getTaskByPriority/${priority}`);
   }
 
-  createTask(todo: Todo): Observable<Todo> {
-    return this.http.post<Todo>(`${this.baseUrl}/createTask`, todo);
-  }
-
+  // UPDATE
   updateTask(id: number, todo: Todo): Observable<Todo> {
-    return this.http.put<Todo>(`${this.baseUrl}/updateTask/${id}`, todo);
+    return this.http.put<Todo>(`${this.apiUrl}/updateTask/${id}`, todo);
   }
 
-  markTask(id: number, status: string): Observable<Todo> {
-    return this.http.patch<Todo>(`${this.baseUrl}/${id}/mark?markTask=${status}`, {});
+  markTask(id: number, markTask: string): Observable<Todo> {
+    return this.http.patch<Todo>(`${this.apiUrl}/${id}/mark?markTask=${markTask}`, {});
   }
 
-  deleteTask(id: number): Observable<string> {
-    return this.http.delete<string>(`${this.baseUrl}/deleteTaskById/${id}`);
+  // DELETE
+  deleteTask(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/deleteTaskById/${id}`, { responseType: 'text' });
   }
 }

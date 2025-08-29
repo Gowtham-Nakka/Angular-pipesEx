@@ -1,15 +1,12 @@
 <div class="form-container">
   <h2>➕ Add Task</h2>
-
   <form (ngSubmit)="addTask()">
     <input type="text" [(ngModel)]="todo.taskDesc" name="taskDesc" placeholder="Enter task" required />
-
     <select [(ngModel)]="todo.priority" name="priority">
       <option value="LOW">Low</option>
       <option value="MEDIUM">Medium</option>
       <option value="HIGH">High</option>
     </select>
-
     <button type="submit">Add Task</button>
   </form>
 </div>
